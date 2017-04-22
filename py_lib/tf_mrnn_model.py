@@ -155,7 +155,7 @@ class mRNNModel(object):
     
     target = tf.reshape(math_ops.to_int64(self._targets), [-1])
     valid_flag = tf.reshape(self._valid_flags, [-1])
-    loss = tf.nn.sparse_softmax_cross_entropy_with_logits(logit, target)
+    loss = tf.nn.sparse_softmax_cross_entropy_with_logits(labels=target,logits=logit)
     self._cost = cost = tf.reduce_sum(loss * valid_flag) / (
         tf.reduce_sum(valid_flag) + 1e-12)
     
