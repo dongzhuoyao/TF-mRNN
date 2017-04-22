@@ -57,8 +57,8 @@ class mRNNDecoder(object):
           num_steps=1, 
           config=self.config,
           model_name=self.model_name,
-          flag_with_saver=False,
-          flag_reset_state=True)
+          flag_with_saver=False,)
+          #flag_reset_state=True),temporarily removed by dongzhuoyao.
           
   def load_model(self, model_path):
     self.model_init.saver.restore(self.session, model_path)
