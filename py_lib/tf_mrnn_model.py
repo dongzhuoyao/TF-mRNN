@@ -97,7 +97,7 @@ class mRNNModel(object):
           initial_state=initial_state,
           sequence_length=self._seq_lens)
       self._final_state = state
-      output_rnn = tf.reshape(tf.concat(1, outputs_rnn), [-1, rnn_size])
+      output_rnn = tf.reshape(tf.concat(outputs_rnn,1), [-1, rnn_size])
       
       # Map RNN output to multimodal space
       w_r2m = tf.get_variable("w_r2m", [rnn_size, mm_size])
@@ -137,7 +137,7 @@ class mRNNModel(object):
           initial_state=initial_state,
           sequence_length=self._seq_lens)
       self._final_state = state
-      output_rnn = tf.reshape(tf.concat(1, outputs_rnn), [-1, rnn_size])
+      output_rnn = tf.reshape(tf.concat(outputs_rnn,1), [-1, rnn_size])
       
       # Map multimodal space to word space
       w_m2w = tf.get_variable("w_m2w", [rnn_size, emb_size])
