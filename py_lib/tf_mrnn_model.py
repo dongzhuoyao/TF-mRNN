@@ -74,7 +74,7 @@ class mRNNModel(object):
 
     print("state_size shape: {}".format(cell.state_size))
     #state_size = cell.state_size,here is a bug.
-    state_size = cell.state_size
+    state_size = cell.state_size[0]
     
     # Create word embeddings
     self._embedding = embedding = tf.get_variable("embedding", 
