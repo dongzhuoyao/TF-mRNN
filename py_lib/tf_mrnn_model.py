@@ -93,7 +93,7 @@ class mRNNModel(object):
             batch_size, tf.float32)
       inputs = [tf.squeeze(input_, [1])
           for input_ in tf.split(inputs,num_or_size_splits=num_steps,axis=1)]
-      outputs_rnn, state = tf.nn.rnn(cell, inputs, 
+      outputs_rnn, state = tf.contrib.rnn(cell, inputs,
           initial_state=initial_state,
           sequence_length=self._seq_lens)
       self._final_state = state
@@ -133,7 +133,7 @@ class mRNNModel(object):
       # Run RNNs
       inputs = [tf.squeeze(input_, [1])
           for input_ in tf.split(1, num_steps, inputs)]
-      outputs_rnn, state = tf.nn.rnn(cell, inputs, 
+      outputs_rnn, state = tf.contrib.rnn(cell, inputs,
           initial_state=initial_state,
           sequence_length=self._seq_lens)
       self._final_state = state
