@@ -61,16 +61,16 @@ class mRNNModel(object):
 
     # Create rnn cell
     if config.rnn_type == 'GRU':
-      rnn_cell_basic = tf.nn.rnn_cell.GRUCell(rnn_size)
+      rnn_cell_basic = tf.contrib.rnn.GRUCell(rnn_size)
     elif config.rnn_type == 'LSTM':
-      rnn_cell_basic = tf.nn.rnn_cell.LSTMCell(rnn_size, input_size=emb_size, 
+      rnn_cell_basic = tf.contrib.rnn.LSTMCell(rnn_size, input_size=emb_size,
           use_peepholes=True)
     else:
       raise NameError("Unknown rnn type %s!" % config.rnn_type)
     if is_training and config.keep_prob_rnn < 1:
-      rnn_cell_basic = tf.nn.rnn_cell.DropoutWrapper(
+      rnn_cell_basic = tf.contrib.rnn.DropoutWrapper(
           rnn_cell_basic, output_keep_prob=config.keep_prob_rnn)
-    cell = tf.nn.rnn_cell.MultiRNNCell([rnn_cell_basic] * config.num_rnn_layers)
+    cell =tf.contrib.rnn.MultiRNNCell([rnn_cell_basic] * config.num_rnn_layers)
     state_size = cell.state_size
     
     # Create word embeddings
