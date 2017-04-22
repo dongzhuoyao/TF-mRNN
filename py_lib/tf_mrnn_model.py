@@ -71,6 +71,9 @@ class mRNNModel(object):
       rnn_cell_basic = tf.contrib.rnn.DropoutWrapper(
           rnn_cell_basic, output_keep_prob=config.keep_prob_rnn)
     cell =tf.contrib.rnn.MultiRNNCell([rnn_cell_basic] * config.num_rnn_layers)
+
+    print("state_size shape: {}".format(cell.state_size.get_shape()))
+    #state_size = cell.state_size,here is a bug.
     state_size = cell.state_size
     
     # Create word embeddings
